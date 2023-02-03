@@ -1,8 +1,8 @@
 import Layout from "@/components/layout"
-import ListadoGuitarras from "@/components/listado-guitarras"
+import Guitarra from "@/components/guitarra"
+import styles from '@/styles/grid.module.css'
 
 const Tienda = ({guitarras}) => {
-  console.log(guitarras)
   return (
     <>
       <Layout
@@ -11,13 +11,16 @@ const Tienda = ({guitarras}) => {
       >
         <main className="contenedor">
           <h1 className="heading">Nuestra Colección</h1>
-          <ListadoGuitarras />
+          <div className={styles.grid}>
+            {guitarras?.map(guitarra => (
+              <Guitarra key={guitarra.id} guitarra={guitarra.attributes} />
+            ))}
+          </div>
         </main>
       </Layout>
     </>
   )
 }
-
 
 // export const getStaticProps = async () => {
 //   const respuesta = await fetch(`${process.env.API_URL}/guitarras?populate=imagen`)
@@ -37,6 +40,5 @@ export const getServerSideProps = async () => {
     }
   }
 }
-
 
 export default Tienda

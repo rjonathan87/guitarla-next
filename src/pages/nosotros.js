@@ -1,6 +1,6 @@
 import Layout from "@/components/layout"
 import Image from "next/image"
-import styles from '../styles/nosotros.module.css'
+import styles from '@/styles/nosotros.module.css'
 
 const Nosotros = () => {
   return (

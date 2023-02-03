@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import styles from '../styles/header.module.css'
+import styles from '@/styles/header.module.css'
 
 const Header = () => {
   const router = useRouter()
@@ -11,7 +11,7 @@ const Header = () => {
       <div className={styles.barra}>
         <Link href='/'>
           <Image 
-            src="img/logo.svg"
+            src="/img/logo.svg"
             alt='GuitarLA - Logo' 
             width={300}
             height={40}
