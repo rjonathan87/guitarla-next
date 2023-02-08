@@ -1,8 +1,13 @@
 import "@/styles/globals.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps }) {
-  const [carrito, setCarrito] = useState([])
+  const carritoLS = typeof window !== 'undefined' ? localStorage.getItem('carrito') ?? [] : []
+  const [carrito, setCarrito] = useState(carritoLS)
+  useEffect(() => {
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+  }, [carrito])
+  
   const agregarCarrito = (guitarra) => {
     // Comprobar si la guitarra ya esta en el carrito...
     if (carrito.some((guitarraState) => guitarraState.id === guitarra.id)) {
@@ -22,7 +27,6 @@ export default function App({ Component, pageProps }) {
       localStorage.setItem("carrito", JSON.stringify(carrito));
     }
   };
-
   const eliminarProducto = (id) => {
     if(confirm('Está seguro de eliminar?')){
       const carritoActualizado = carrito.filter((producto) => producto.id != id);
@@ -30,7 +34,6 @@ export default function App({ Component, pageProps }) {
       window.localStorage.setItem("carrito", JSON.stringify(carrito));
     }
   };
-
   const actualizarCantidad = (guitarra) => {
     const carritoActualizado = carrito.map((guitarraState) => {
       if (guitarraState.id === guitarra.id) {
