@@ -1,6 +1,7 @@
 .contenido {
   display: grid;
-  align-items: center;
+  grid-template-columns: 2fr;
+  align-items: flex-start;
   gap: 5rem;
 }
 @media (min-width: 768px) {
@@ -18,6 +19,7 @@
   align-items: center;
   padding: 3rem 0;
   border-bottom: 1px solid #cfcfcf;
+  position: relative;
 }
 .producto:last-of-type {
   border: none;
@@ -33,6 +35,8 @@
   background-color: #f9fafb;
   padding: 3rem;
   border-radius: 1rem;
+  position: sticky;
+  top: 3rem;
 }
 .nombre {
   font-weight: 700;
@@ -59,4 +63,14 @@
   padding: 1rem;
   text-align: center;
   width: 100%;
+}
+.eliminar {
+  all: unset;
+  position: absolute;
+  top: 3rem;
+  right: 1rem;
+  font-weight: 700;
+}
+.eliminar:hover {
+  cursor: pointer;
 }

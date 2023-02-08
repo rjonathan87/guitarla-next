@@ -24,9 +24,11 @@ export default function App({ Component, pageProps }) {
   };
 
   const eliminarProducto = (id) => {
-    const carritoActualizado = carrito.filter((producto) => producto.id != id);
-    setCarrito(carritoActualizado);
-    window.localStorage.setItem("carrito", JSON.stringify(carrito));
+    if(confirm('Está seguro de eliminar?')){
+      const carritoActualizado = carrito.filter((producto) => producto.id != id);
+      setCarrito(carritoActualizado);
+      window.localStorage.setItem("carrito", JSON.stringify(carrito));
+    }
   };
 
   const actualizarCantidad = (guitarra) => {
