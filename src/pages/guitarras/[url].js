@@ -1,10 +1,31 @@
 import Image from "next/image"
 import styles from '@/styles/guitarras.module.css'
 import Layout from "@/components/layout"
+import { useState } from "react"
 
-const Producto = ({guitarra}) => {
+const Producto = ({guitarra, agregarCarrito}) => {
+  const [cantidad, setCantidad] = useState(0)
   const { nombre, descripcion, precio } = guitarra[0].attributes
   const { url: imagen } = guitarra[0].attributes.imagen.data.attributes.formats.medium
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    if(cantidad <= 0){
+      alert('Cantidad no válida')
+      return
+    }
+
+    // Construir el objeto
+    const guitarraSeleccionada = {
+      id: guitarra[0].id,
+      imagen,
+      nombre,
+      precio,
+      cantidad
+    }
+    // pasando valores a context
+    agregarCarrito(guitarraSeleccionada)
+  }
 
   return (
     <Layout
@@ -20,10 +41,17 @@ const Producto = ({guitarra}) => {
       <div className={styles.contenido}>
         <h3>{nombre}</h3>
         <p className={styles.descripcion}>{descripcion}</p>
-        <p className={styles.precio}>{precio}</p>
-        <form className={styles.formulario}>
+        <p className={styles.precio}>${precio}</p>
+        <form 
+          className={styles.formulario}
+          onSubmit={ handleSubmit }
+        >
           <label htmlFor="cantidad">Cantidad: </label>
-          <select id="cantidad" className="cantidad">
+          <select 
+            id="cantidad" 
+            className="cantidad"
+            onChange={ e => setCantidad(+e.target.value) }
+          >
             <option value="0">-- Seleccione --</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -31,7 +59,10 @@ const Producto = ({guitarra}) => {
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <input type="submit" value="Agregar al Carrito" />
+          <input 
+            type="submit" 
+            value="Agregar al Carrito" 
+          />
         </form>
       </div>
     </div>

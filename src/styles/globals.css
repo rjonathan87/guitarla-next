@@ -50,4 +50,5 @@ main {
 }
 .enlace:hover {
   background-color: var(--primary);
+  cursor: pointer;
 }
